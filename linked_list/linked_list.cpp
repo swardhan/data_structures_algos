@@ -123,8 +123,17 @@ void mid_point(Node* head){
 	(flag)?(cout << prev->data << " " << first -> data << endl):(cout << first -> data << endl);
 }
 
-void reverse_ll(Node** head){
-
+Node* reverse_ll(Node* head){
+	Node* prev = NULL;
+	Node* current = head;
+	Node* next = NULL;
+	while(current != NULL){
+		next = current->next;
+		current -> next = prev;
+		prev = current;
+		current = next;
+	}
+	return prev;
 }
 
 int main() {
@@ -133,25 +142,36 @@ int main() {
 	Node *head = take_input_better();
 	print(head);
 
+	// // Reversing a LL
+	// head = reverse_ll(head);
+	// print(head);
+
 	// cout << "Enter Index: ";
 	// cin >> i;
+
 	// //print ith node
 	// print_ith(head, i);
+
 	// int data, pos, del_pos;
 	// cout << "Enter the Element: " << endl;
 	// cin >> data;
 	// cout << "Enter the Position: " << endl;
 	// cin >> pos;
+
 	// // Insert data at i-th node
 	// insert_at_i(&head, data, pos);
 	// print(head);
+
 	// cout << "Delete element at pos? ";
 	// cin >> del_pos;
 	// cout << "Deleting" << endl;
+	
 	// // Delete i-th Node
 	// delete_at_i(&head, del_pos);
 	// print(head);
+
 	// cout << "Length of the linked list is: " << length(head) << endl;
+
 	// // Finding mid-point of the Linked List 
 	// mid_point(head);
 	
