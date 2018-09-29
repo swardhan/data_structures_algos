@@ -136,6 +136,17 @@ Node* reverse_ll(Node* head){
 	return prev;
 }
 
+Node* reverse_recursive(Node* current, Node* prev = NULL, Node* next = NULL){
+	if(current == NULL){
+		return prev;
+	}
+	next = current->next;
+	current->next = prev;
+	prev = current;
+	current = next;
+	return reverse_recursive(current, prev, next);
+}
+
 int main() {
 
 	int i;
@@ -145,6 +156,10 @@ int main() {
 	// // Reversing a LL
 	// head = reverse_ll(head);
 	// print(head);
+	// // Reversing a LL Recursively
+	// head = reverse_recursive(head);
+	// print(head);
+
 
 	// cout << "Enter Index: ";
 	// cin >> i;
@@ -165,7 +180,7 @@ int main() {
 	// cout << "Delete element at pos? ";
 	// cin >> del_pos;
 	// cout << "Deleting" << endl;
-	
+
 	// // Delete i-th Node
 	// delete_at_i(&head, del_pos);
 	// print(head);
