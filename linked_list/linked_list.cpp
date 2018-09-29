@@ -147,11 +147,62 @@ Node* reverse_recursive(Node* current, Node* prev = NULL, Node* next = NULL){
 	return reverse_recursive(current, prev, next);
 }
 
+Node* merge_ll(Node* head, Node* head2){
+	Node* merged = NULL;
+	Node* ll1 = head;
+	Node* ll2 = head2;
+	Node* first = NULL;
+	while(ll1 != NULL && ll2 != NULL){
+		if(ll1 -> data < ll2 -> data){
+			if(merged == NULL){
+				merged = new Node(ll1 -> data);
+				first = merged;
+			}else{
+				merged -> next = new Node(ll1->data);
+				merged = merged -> next;
+			}
+			ll1 = ll1 -> next;
+		}else{
+			if(merged == NULL){
+				merged = new Node(ll2 -> data);
+				first = merged;
+			}else{
+				merged -> next = new Node(ll2->data);
+				merged = merged -> next;
+			}
+			ll2 = ll2 -> next;
+		}
+	}
+
+	if(ll1 != NULL){
+		while(ll1 != NULL){
+			merged->next = new Node(ll1 -> data);
+			merged = merged -> next;
+			ll1 = ll1 ->next;
+		}
+	}
+	if(ll2 != NULL){
+		while(ll2 != NULL){
+			merged->next = new Node(ll2 -> data);
+			merged = merged -> next;
+			ll2 = ll2 ->next;
+		}
+	}
+	// merged -> next = NULL;
+	return first;
+}
+
 int main() {
 
 	int i;
 	Node *head = take_input_better();
 	print(head);
+
+	Node* head2 = take_input_better();
+	print(head2);
+
+	Node* merged = merge_ll(head, head2);
+	print(merged);
 
 	// // Reversing a LL
 	// head = reverse_ll(head);
