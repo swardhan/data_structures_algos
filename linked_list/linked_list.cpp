@@ -147,7 +147,7 @@ Node* reverse_recursive(Node* current, Node* prev = NULL, Node* next = NULL){
 	return reverse_recursive(current, prev, next);
 }
 
-Node* merge_ll(Node* head, Node* head2){
+Node* basic_merge(Node* head, Node* head2){
 	Node* merged = NULL;
 	Node* ll1 = head;
 	Node* ll2 = head2;
@@ -188,7 +188,6 @@ Node* merge_ll(Node* head, Node* head2){
 			ll2 = ll2 ->next;
 		}
 	}
-	// merged -> next = NULL;
 	return first;
 }
 
@@ -198,11 +197,11 @@ int main() {
 	Node *head = take_input_better();
 	print(head);
 
-	Node* head2 = take_input_better();
-	print(head2);
+	// Node* head2 = take_input_better();
+	// print(head2);
 
-	Node* merged = merge_ll(head, head2);
-	print(merged);
+	// Node* merged = merge_ll(head, head2);
+	// print(merged);
 
 	// // Reversing a LL
 	// head = reverse_ll(head);
