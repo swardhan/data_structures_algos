@@ -63,23 +63,9 @@ void printTree(TreeNode<int>* root) {
 	}
 }
 
-void printTreeLevelWise(TreeNode<int>* root){
-	cout << "Level Order Traversal: " << endl;
-	queue<TreeNode<int>*> pendingNodes;
-	pendingNodes.push(root);
-	while(pendingNodes.size() != 0){
-		TreeNode<int>* front = pendingNodes.front();
-		pendingNodes.pop();
-		cout << front->data << endl;
-		for(int i = 0; i < front->children.size(); i++){
-			pendingNodes.push(front->children[i]);
-		}
-	}
-}
-
 int main() {
 	TreeNode<int>* root = takeInputLevelWise();
-	printTreeLevelWise(root);
+	printTree(root);
 
 	// TreeNode<int>* root = new TreeNode<int>(1);
 	// TreeNode<int>* node1 = new TreeNode<int>(2);
