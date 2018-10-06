@@ -117,8 +117,26 @@ void printKlevelNodes(TreeNode<int>* root, int k){
 	}
 }
 
+void printLeafNodes(TreeNode<int>* root) {
+	if(root == NULL){
+		return;
+	}
+
+	if(root->children.size() == 0){
+		cout << root->data << " ";
+	}
+
+	for(int i = 0; i < root->children.size(); i++) {
+		printLeafNodes(root->children[i]);
+	}
+
+}
+
 int main() {
 	TreeNode<int>* root = takeInputLevelWise();
+
+	printLeafNodes(root);
+
 	// printTreeLevelWise(root);
 
 	// printKlevelNodes(root, 3s);
