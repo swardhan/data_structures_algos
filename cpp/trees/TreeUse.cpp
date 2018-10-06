@@ -103,12 +103,28 @@ int height(TreeNode<int>* root) {
 	return 1 + maxDepth;
 }
 
+void printKlevelNodes(TreeNode<int>* root, int k){
+	if(root == NULL){
+		return;
+	}
+
+	if(k == 0){
+		cout << root->data << endl;;
+	}
+
+	for(int i = 0; i < root->children.size(); i++) {
+		printKlevelNodes(root->children[i], k-1);
+	}
+}
+
 int main() {
 	TreeNode<int>* root = takeInputLevelWise();
-	printTreeLevelWise(root);
+	// printTreeLevelWise(root);
+
+	// printKlevelNodes(root, 3s);
 
 	// cout << "Number of Nodes: " << countNodes(root);
-	
+
 	// cout << "Height of Tree: " << height(root) << endl;
 
 	// TreeNode<int>* root = new TreeNode<int>(1);
