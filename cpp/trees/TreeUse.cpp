@@ -132,10 +132,28 @@ void printLeafNodes(TreeNode<int>* root) {
 
 }
 
+int countLeafNodes(TreeNode<int>* root){
+	if(root == NULL){
+		return 0;
+	}
+
+	if(root->children.size() == 0){
+		return 1;
+	}
+
+	int ans = 0;
+
+	for(int i = 0; i < root->children.size(); i++){
+		ans += countLeafNodes(root->children[i]);
+	}
+
+	return ans;
+}
+
 int main() {
 	TreeNode<int>* root = takeInputLevelWise();
 
-	printLeafNodes(root);
+	cout << "Number of Leaf Nodes: " << countLeafNodes(root) << endl;
 
 	// printTreeLevelWise(root);
 
