@@ -150,10 +150,37 @@ int countLeafNodes(TreeNode<int>* root){
 	return ans;
 }
 
+void preOrder(TreeNode<int>* root){
+	if(root == NULL){
+		return;
+	}
+
+	cout << root->data << " ";
+	for(int i = 0; i < root->children.size(); i++){
+		preOrder(root->children[i]);
+	}
+}
+
+void postOrder(TreeNode<int>* root){
+	if(root == NULL){
+		return;
+	}
+
+	for(int i = 0; i < root->children.size(); i++){
+		postOrder(root->children[i]);
+	}
+	
+	cout << root->data << " ";
+}
+
+// Sample Tree Input: 1 3 2 3 4 2 5 6 2 7 8 0 0 0 0 1 9 0
+
 int main() {
 	TreeNode<int>* root = takeInputLevelWise();
 
-	cout << "Number of Leaf Nodes: " << countLeafNodes(root) << endl;
+	postOrder(root);
+
+	// cout << "Number of Leaf Nodes: " << countLeafNodes(root) << endl;
 
 	// printTreeLevelWise(root);
 
