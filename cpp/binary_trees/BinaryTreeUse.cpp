@@ -131,21 +131,92 @@ void postOrder(BinaryTreeNode<int>* root){
 	cout << root->data << " ";
 }
 
+BinaryTreeNode<int>* buildTreeHelper(int* in, int* pre, int inS, int inE, int preS, int preE) {
+	if (inS > inE) {
+		return NULL;
+	}
+
+	int rootData = pre[preS];
+	int rootIndex = -1;
+	for (int i = inS; i <= inE; i++) {
+		if (in[i] == rootData) {
+			rootIndex = i;
+			break;
+		}
+	}
+
+	int lInS = inS;
+	int lInE = rootIndex - 1;
+	int lPreS = preS + 1;
+	int lPreE = lInE - lInS + lPreS;
+	int rPreS = lPreE + 1;
+	int rPreE = preE;
+	int rInS = rootIndex + 1;
+	int rInE = inE;
+	BinaryTreeNode<int>*  root = new BinaryTreeNode<int>(rootData);
+	root->left = buildTreeHelper(in, pre, lInS, lInE, lPreS, lPreE);
+	root->right = buildTreeHelper(in, pre, rInS, rInE, rPreS, rPreE);
+	return root;
+}
+
+BinaryTreeNode<int>* buildTree(int* in, int* pre, int size) {
+	return buildTreeHelper(in, pre, 0, size - 1, 0, size - 1);
+}
+
+
+//Primitive Diameter of A Binary tree
+int height(BinaryTreeNode<int>* root){
+	if(root == NULL){
+		return 0;
+	}
+
+	return 1 + max(height(root->right), height(root->left));
+}
+int diameter(BinaryTreeNode<int>* root){
+	if(root == NULL){
+		return 0;
+	}
+
+	int option1 = height(root->right)+height(root->left);
+	int option2 = diameter(root->right);
+	int option3 = diameter(root->left);
+	return max(option1, max(option2, option3));
+}
+
 //Sample Tree: 1 2 3 4 5 6 7 -1 -1 -1 -1  8 9 -1 -1 -1 -1 -1 -1
 
 int main(){
+
+	// Static Allocation
 	// BinaryTreeNode<int>* root = new BinaryTreeNode<int>(1);
 	// BinaryTreeNode<int>* node1 = new BinaryTreeNode<int>(2);
 	// BinaryTreeNode<int>* node2 = new BinaryTreeNode<int>(3);
-
 	// root->right = node1;
 	// root->left = node2;
+
+	//Take Input Level Wise
 	BinaryTreeNode<int>* root = takeInputLevelWise();
-	printTreeLevelWise(root);
+	// printTreeLevelWise(root);
+	printTree(root);
+
+	cout << "Diameter : " << diameter(root) << endl;
+
+	//Traversals
 	// cout << "inOrder: " << inOrder(root) << endl;
 	// cout << "preOrder: " << preOrder(root) << endl;
-	// cout << "postOrder: " << postOrder(root) << endl;	
+	// cout << "postOrder: " << postOrder(root) << endl;
+
+	//Number of nodes
 	// cout << "Number of Nodes: " << countNodes(root) << endl;
+
+	//Build Tree with Preorder and Inorder
+	// int in[] = {4,2,5,1,8,6,9,3,7};
+	// int pre[] = {1,2,4,5,3,6,8,9,7};
+	// BinaryTreeNode<int>* root = buildTree(in, pre, 9);
+	// printTree(root);
+	// cout << "Num: " << countNodes(root) << endl;
+	// inOrder(root);
+
 
 	delete root;
 }

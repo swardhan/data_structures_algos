@@ -197,4 +197,5 @@ int main() {
 	// root->children.push_back(node2);
 	
 	// TODO delete tree
+	delete root;
 }
