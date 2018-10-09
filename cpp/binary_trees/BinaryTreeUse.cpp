@@ -1,6 +1,7 @@
 #include <iostream>
 #include "BinaryTreeNode.h"
 #include <queue>
+#include <limits.h>
 using namespace std;
 
 BinaryTreeNode<int>* takeInput() {
@@ -218,6 +219,22 @@ int sumOfNodes(BinaryTreeNode<int>* root){
 	return root->data + sumOfNodes(root->left) + sumOfNodes(root->right);
 }
 
+pair<int, int> maxMinNode(BinaryTreeNode<int>* root){
+	if(root == NULL){
+		pair<int, int> p;
+		p.first = 0;
+		p.second = INT_MAX;
+		return p;
+	}
+	pair<int, int> rightAns = maxMinNode(root->right);
+	pair<int, int> leftAns = maxMinNode(root->left);
+
+	pair<int, int> p;
+	p.first = max(leftAns.first, max(root->data, rightAns.first));
+	p.second = min(rightAns.second, min(root->data, rightAns.second));
+	return p;
+}
+
 //Sample Tree: 1 2 3 4 5 6 7 -1 -1 -1 -1  8 9 -1 -1 -1 -1 -1 -1
 
 int main(){
@@ -233,6 +250,9 @@ int main(){
 	BinaryTreeNode<int>* root = takeInputLevelWise();
 	// printTreeLevelWigitse(root);
 	printTree(root);
+
+	cout << "Max Element is: " << maxMinNode(root).first << endl;
+	cout << "Min Element is: " << maxMinNode(root).second << endl;
 
 	// //Sum of Nodes
 	// cout << "Sum Of Nodes: " << sumOfNodes(root) << endl;
