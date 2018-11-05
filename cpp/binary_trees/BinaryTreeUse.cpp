@@ -2,6 +2,7 @@
 #include "BinaryTreeNode.h"
 #include <queue>
 #include <limits.h>
+
 using namespace std;
 
 BinaryTreeNode<int>* takeInput() {
@@ -251,8 +252,9 @@ int main(){
 	// printTreeLevelWigitse(root);
 	printTree(root);
 
-	cout << "Max Element is: " << maxMinNode(root).first << endl;
-	cout << "Min Element is: " << maxMinNode(root).second << endl;
+	// // Min and Max Elements	
+	// cout << "Max Element is: " << maxMinNode(root).first << endl;
+	// cout << "Min Element is: " << maxMinNode(root).second << endl;
 
 	// //Sum of Nodes
 	// cout << "Sum Of Nodes: " << sumOfNodes(root) << endl;
